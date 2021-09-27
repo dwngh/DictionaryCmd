@@ -74,4 +74,11 @@ public class DictionaryManagement {
             dict.insertNewWord(word_target, word_explain);
         }
     }
+
+    /**
+     * Write Edit and Delete methods in command line here
+     * */
+
+
+    
 }

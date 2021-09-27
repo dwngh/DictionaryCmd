@@ -73,14 +73,15 @@ public class Dictionary {
 
     /** Edit word_explain of a word_target in Dictionary
      * @param word_target
+     * @param word_explain
      * @return  True if there's the word with given word_target
      *          False if there's not word with given word_target */
-    public boolean edit(String word_target) {
+    public boolean edit(String word_target, String word_explain) {
         boolean isExisted = false;
         for (Word item : dict) {
             if (item.getWord_target().equals(word_target)) {
                 isExisted = true;
-                item.setWord_target(word_target);
+                item.setWord_explain(word_explain);
             }
         }
         return isExisted;
