@@ -36,7 +36,7 @@ public class Dictionary {
             for (Word item : dict) {
                 boolean isSimilar = true;
                 for (int i = 0; i < lookup.length(); i++) {
-                    if (item.getWord_target().charAt(i) == lookup.charAt(i)) {
+                    if (item.getWord_target().charAt(i) != lookup.charAt(i)) {
                         isSimilar = false;
                         break;
                     }
