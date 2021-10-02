@@ -86,4 +86,11 @@ public class Dictionary {
         }
         return isExisted;
     }
+
+    /**
+     * Clean
+     * */
+    public void clean() {
+        dict = new ArrayList<Word>();
+    }
 }

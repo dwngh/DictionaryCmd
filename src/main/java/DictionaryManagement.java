@@ -28,6 +28,7 @@ public class DictionaryManagement {
             BufferedReader buf = new BufferedReader(new FileReader(DICT_LOCATION));
             String line = null;
             String[] dict_word;
+            dict.clean();
             while (true) {
                 line = buf.readLine();
                 if (line == null) {
@@ -79,6 +80,7 @@ public class DictionaryManagement {
      * Write Edit and Delete methods in command line here
      * */
 
+    // Viet commit
 
     
 }
