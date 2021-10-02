@@ -48,4 +48,9 @@ public class DictionaryCommandline {
         }
         System.out.println("-------------------------");
     };
+
+    /**write to file*/
+    public void outFile() {
+        dict_mng.dictionaryExportToFile();
+    }
 }
