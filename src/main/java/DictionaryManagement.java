@@ -7,6 +7,7 @@ public class DictionaryManagement {
     // Attributes
     private Dictionary dict;
     private String DICT_LOCATION = "src/main/java/dictionaries.txt";
+    private String OUTPUT_DICT = "D:\\JAVA_FILE\\Project 2 -dictionnary\\dictionariesOut.txt";
 
     /**
      * Constructor
@@ -21,6 +22,11 @@ public class DictionaryManagement {
      * */
     public String[][] getWords(String lookup) {
         return dict.getAllWords(lookup);
+    }
+
+    /**show all words in dictionary. */
+    public String[][] showDict() {
+        return dict.showAllDictionary();
     }
 
     public void insertFromFile() {
@@ -72,6 +78,29 @@ public class DictionaryManagement {
             word_target = sc.nextLine();
             word_explain = sc.nextLine();
             dict.insertNewWord(word_target, word_explain);
+        }
+    }
+
+    /**Export To File. */
+    public void dictionaryExportToFile() {
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(OUTPUT_DICT));
+            String[][] wr = dict.showAllDictionary();
+            if (wr[0][0] == null) {
+                System.out.println("Dictionary is empty!");
+            } else {
+                int n = 0;
+                while (n < wr.length) {
+                    out.write(wr[n][0]);
+                    out.write("     ");
+                    out.write(wr[n][1]);
+                    out.write("\n");
+                    ++n;
+                }
+            }
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
