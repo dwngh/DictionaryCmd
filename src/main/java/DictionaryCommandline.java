@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class DictionaryCommandline {
     // Attributes
     private DictionaryManagement dict_mng;
@@ -28,5 +30,22 @@ public class DictionaryCommandline {
         dict_mng.dictionaryLookup();
     };
 
-    public void dictionarySearcher() {};
+    public void dictionarySearcher() {
+        dict_mng.insertFromFile();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Search: ");
+        String lookup = sc.nextLine();
+        String[][] r = dict_mng.getWords(lookup);
+        System.out.println("Result: ");
+        System.out.println("-------------------------");
+        if (r[0][0] == null) {
+            System.out.println("    No such words!");
+        } else {
+            int i = 0;
+            while (r[i][0] != null) {
+                System.out.println("    " + i + ". " + r[i++][0]);
+            }
+        }
+        System.out.println("-------------------------");
+    };
 }
