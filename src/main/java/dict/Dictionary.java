@@ -93,4 +93,8 @@ public class Dictionary {
     public void clean() {
         dict = new ArrayList<Word>();
     }
+
+
+    public String[][] showAllDictionary() {
+    }
 }

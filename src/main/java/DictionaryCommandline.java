@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class DictionaryCommandline {
     // Attributes
-    private DictionaryManagement dict_mng;
+    private final DictionaryManagement dict_mng;
 
     /** Constructor */
     public DictionaryCommandline() {
@@ -17,18 +17,18 @@ public class DictionaryCommandline {
             System.out.print(list[i][0] + "   ");
             System.out.println(list[i][1]);
         }
-    };
+    }
 
     public void dictionaryBasic() {
         dict_mng.insertFromCommandline();
         showAllWords();
-    };
+    }
 
     public void dictionaryAdvanced() {
         dict_mng.insertFromFile();
         showAllWords();
         dict_mng.dictionaryLookup();
-    };
+    }
 
     public void dictionarySearcher() {
         dict_mng.insertFromFile();
@@ -47,5 +47,5 @@ public class DictionaryCommandline {
             }
         }
         System.out.println("-------------------------");
-    };
+    }
 }

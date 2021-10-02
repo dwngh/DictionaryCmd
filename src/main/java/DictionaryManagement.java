@@ -1,13 +1,16 @@
 import dict.Dictionary;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
-
+import java.io.FileWriter;
 public class DictionaryManagement {
     // Attributes
-    private Dictionary dict;
-    private String DICT_LOCATION = "src/main/java/dictionaries.txt";
-    private String OUTPUT_DICT = "D:\\JAVA_FILE\\Project 2 -dictionnary\\dictionariesOut.txt";
+    private final Dictionary dict;
+    private final String OUTPUT_DICT = "D:\\JAVA_FILE\\Project 2 -dictionary\\dictionariesOut.txt";
 
     /**
      * Constructor
@@ -31,6 +34,7 @@ public class DictionaryManagement {
 
     public void insertFromFile() {
         try {
+            String DICT_LOCATION = "src/main/java/dictionaries.txt";
             BufferedReader buf = new BufferedReader(new FileReader(DICT_LOCATION));
             String line = null;
             String[] dict_word;
@@ -51,7 +55,6 @@ public class DictionaryManagement {
         } catch(Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void dictionaryLookup() {
@@ -104,12 +107,36 @@ public class DictionaryManagement {
             e.printStackTrace();
         }
     }
+    /**Edit a word and meaning * . */
+    public void dictionaryEdit(int lineNumber, String data) throws IOException {
+        Path path = Paths.get("dictionaries.txt");
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        lines.set(lineNumber - 1, data);
+        Files.write(path, lines, StandardCharsets.UTF_8);
+        }
+        /*
+        2 đoạn method edit và delete của tui thì tui chưa kiểm thử đc vì tui chưa biết cách cho máy tui build DictionaryManagement thay vì liên tục build Dictionary
+        tui dùng inspect code thì không thấy có lỗi gì, nếu các ông thấy có lỗi hay là cái UI không hay lắm thì sửa giúp vào bảo tui
+         */
 
-    /**
-     * Write Edit and Delete methods in command line here
-     * */
-
-    // Viet commit
-
-    
+    public void dictionaryDelete() throws IOException {
+        File inputFile = new File("src/main/java/dictionaries.txt");
+        File tempFile = new File("src/main/java/dictionariestemp.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+        String currentline;
+        while ((currentline = reader.readLine()) != null) {
+            if(!currentline.equalsIgnoreCase("")){
+            /*ở đây tui muốn đoạn này nhận từ để delete từ người dùng nhưng tui chưa biết làm thế nào
+            để cho từ đó vào đây, các ông có cách nào tốt hơn thì bảo tui
+             */
+                writer.write(currentline + System.getProperty("line.separator"));
+            }
+        }
+        writer.close();
+        reader.close();
+    }
+    /*
+    ở cái tệp java này tui nhờ máy quick fix nhiều đoạn cho đỡ lỗi, có thể sai nên các ông kiểm thử
+     */
 }
