@@ -52,5 +52,9 @@ public class DictionaryCommandline {
     /**write to file*/
     public void outFile() {
         dict_mng.dictionaryExportToFile();
+        System.out.println("Exported to " + dict_mng.getOUTPUT_DICT());
     }
+
+    public void edit() {}
+    public void delete() {}
 }

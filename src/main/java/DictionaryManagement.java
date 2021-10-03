@@ -2,6 +2,8 @@ import dict.Dictionary;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class DictionaryManagement {
     // Attributes
@@ -100,9 +102,13 @@ public class DictionaryManagement {
                 }
             }
             out.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getOUTPUT_DICT() {
+        return OUTPUT_DICT;
     }
 
     /**
