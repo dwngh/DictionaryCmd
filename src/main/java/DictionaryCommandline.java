@@ -11,7 +11,7 @@ public class DictionaryCommandline {
 
     /** Show all words in the dictionary */
     public void showAllWords() {
-        String[][] list = dict_mng.getWords("");
+        String[][] list = dict_mng.showDict();
         for (int i = 0; i < list.length; i++) {
             System.out.print(i + "    ");
             System.out.print(list[i][0] + "   ");
