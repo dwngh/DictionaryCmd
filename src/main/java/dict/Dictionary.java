@@ -20,6 +20,15 @@ public class Dictionary {
         dict.add(new Word(word_target, word_explain));
     }
 
+    public String[][] showAllDictionary() {
+        String[][] wr = new String[dict.size()][2];
+        for (int i = 0; i < dict.size(); i++) {
+            wr[i][0] = dict.get(i).getWord_target();
+            wr[i][1] = dict.get(i).getWord_explain();
+        }
+        return wr; 
+    }
+
     /**
      * Get all words with lookup request
      * @param lookup    If it's empty, method will return all the words
@@ -27,10 +36,7 @@ public class Dictionary {
     public String[][] getAllWords(String lookup) {
         String[][] r = new String[dict.size()][2];
         if (lookup == null || lookup.length() == 0) {
-            for (int i = 0; i < dict.size(); i++) {
-                r[i][0] = dict.get(i).getWord_target();
-                r[i][1] = dict.get(i).getWord_explain();
-            }
+            return r;
         } else {
             int index = 0;
             for (Word item : dict) {
