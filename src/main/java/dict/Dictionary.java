@@ -30,6 +30,20 @@ public class Dictionary {
     }
 
     /**
+     * Get word with index
+     * @param index
+     * */
+    public String[] getWord(int index) {
+        if (0 <= index && index < dict.size()) {
+            String[] r = new String[2];
+            r[0] = dict.get(index).getWord_target();
+            r[1] = dict.get(index).getWord_explain();
+            return r;
+        }
+        return null;
+    }
+
+    /**
      * Get all words with lookup request
      * @param lookup    If it's empty, method will return all the words
      *                  Otherwise, it will return the words which starting with lookup string */
@@ -93,6 +107,15 @@ public class Dictionary {
         return isExisted;
     }
 
+    /** Edit word_explain of an index in Dictionary
+     * @param index
+     * @param word_explain
+     * @return  True if there's the word with given word_target
+     *          False if there's not word with given word_target */
+    public boolean edit(int index, String word_explain) {
+        dict.get(index).setWord_explain(word_explain);
+        return true;
+    }
     /**
      * Clean
      * */

@@ -9,7 +9,7 @@ public class DictionaryManagement {
     // Attributes
     private Dictionary dict;
     private String DICT_LOCATION = "src/main/java/dictionaries.txt";
-    private String OUTPUT_DICT = "D:\\JAVA_FILE\\Project 2 -dictionnary\\dictionariesOut.txt";
+    private String OUTPUT_DICT = "src/main/java/dictionariesOut.txt";
 
     /**
      * Constructor
@@ -95,7 +95,7 @@ public class DictionaryManagement {
                 int n = 0;
                 while (n < wr.length) {
                     out.write(wr[n][0]);
-                    out.write("     ");
+                    out.write("\t");
                     out.write(wr[n][1]);
                     out.write("\n");
                     ++n;
@@ -112,10 +112,27 @@ public class DictionaryManagement {
     }
 
     /**
-     * Write Edit and Delete methods in command line here
+     * Delete method with commandline
      * */
-
-    // Viet commit
+    public void delete() {
+        System.out.print("Index of word you want to delete: ");
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+        String[] word = dict.getWord(n);
+        if (word == null) System.out.println("Invalid index! ");
+        else {
+            System.out.println("Are you sure to delete word:" + word[0] + "? (Y to confirm)");
+            System.out.print(">>>> ");
+            char chr = sc.nextLine().charAt(0);
+            if (chr == 'Y') {
+                dict.delete(n);
+                System.out.println("Deleted! ");
+            } else {
+                System.out.println("Terminated! ");
+            }
+        }
+    }
 
     
 }
