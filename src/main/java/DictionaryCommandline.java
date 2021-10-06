@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DictionaryCommandline {
@@ -7,6 +8,7 @@ public class DictionaryCommandline {
     /** Constructor */
     public DictionaryCommandline() {
         dict_mng = new DictionaryManagement();
+        dict_mng.insertFromFile();
     }
 
     /** Show all words in the dictionary */
@@ -25,13 +27,11 @@ public class DictionaryCommandline {
     };
 
     public void dictionaryAdvanced() {
-        dict_mng.insertFromFile();
         showAllWords();
         dict_mng.dictionaryLookup();
     };
 
     public void dictionarySearcher() {
-        dict_mng.insertFromFile();
         Scanner sc = new Scanner(System.in);
         System.out.print("Search: ");
         String lookup = sc.nextLine();
@@ -52,5 +52,16 @@ public class DictionaryCommandline {
     /**write to file*/
     public void outFile() {
         dict_mng.dictionaryExportToFile();
+        System.out.println("Exported to " + dict_mng.getOUTPUT_DICT());
+    }
+
+    public void edit() throws IOException {
+        showAllWords();
+        dict_mng.DictEdit();
+    }
+
+    public void delete() {
+        showAllWords();
+        dict_mng.delete();
     }
 }

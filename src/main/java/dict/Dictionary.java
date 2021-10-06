@@ -1,6 +1,7 @@
 package dict;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Dictionary {
     // Attribute
@@ -26,7 +27,21 @@ public class Dictionary {
             wr[i][0] = dict.get(i).getWord_target();
             wr[i][1] = dict.get(i).getWord_explain();
         }
-        return wr; 
+        return wr;
+    }
+
+    /**
+     * Get word with index
+     * @param index
+     * */
+    public String[] getWord(int index) {
+        if (0 <= index && index < dict.size()) {
+            String[] r = new String[2];
+            r[0] = dict.get(index).getWord_target();
+            r[1] = dict.get(index).getWord_explain();
+            return r;
+        }
+        return null;
     }
 
     /**
@@ -76,31 +91,25 @@ public class Dictionary {
     public void delete(int index) {
         dict.remove(index);
     }
-
-    /** Edit word_explain of a word_target in Dictionary
-     * @param word_target
+    /* Edit word_target of an index in Dictionary*/
+    public boolean word_edit(int index, String word_target){
+        dict.get(index).setWord_target(word_target);
+        return true;
+    }
+    /** Edit word_explain of an index in Dictionary
+     * @param index
      * @param word_explain
      * @return  True if there's the word with given word_target
      *          False if there's not word with given word_target */
-    public boolean edit(String word_target, String word_explain) {
-        boolean isExisted = false;
-        for (Word item : dict) {
-            if (item.getWord_target().equals(word_target)) {
-                isExisted = true;
-                item.setWord_explain(word_explain);
-            }
-        }
-        return isExisted;
+    public boolean edit(int index, String word_explain) {
+        dict.get(index).setWord_explain(word_explain);
+        return true;
     }
-
+    /*thanks for the help my man - Viet*/
     /**
      * Clean
      * */
     public void clean() {
         dict = new ArrayList<Word>();
-    }
-
-
-    public String[][] showAllDictionary() {
     }
 }

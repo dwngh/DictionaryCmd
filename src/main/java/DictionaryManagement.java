@@ -1,16 +1,14 @@
 import dict.Dictionary;
+
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Scanner;
-import java.io.FileWriter;
+import java.lang.String;
+
 public class DictionaryManagement {
     // Attributes
-    private final Dictionary dict;
-    private final String OUTPUT_DICT = "D:\\JAVA_FILE\\Project 2 -dictionary\\dictionariesOut.txt";
+    private Dictionary dict;
+    private String DICT_LOCATION = "src/main/java/dictionaries.txt";
+    private String OUTPUT_DICT = "src/main/java/dictionariesOut.txt";
 
     /**
      * Constructor
@@ -34,7 +32,6 @@ public class DictionaryManagement {
 
     public void insertFromFile() {
         try {
-            String DICT_LOCATION = "src/main/java/dictionaries.txt";
             BufferedReader buf = new BufferedReader(new FileReader(DICT_LOCATION));
             String line = null;
             String[] dict_word;
@@ -55,6 +52,7 @@ public class DictionaryManagement {
         } catch(Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void dictionaryLookup() {
@@ -96,47 +94,65 @@ public class DictionaryManagement {
                 int n = 0;
                 while (n < wr.length) {
                     out.write(wr[n][0]);
-                    out.write("     ");
+                    out.write("\t");
                     out.write(wr[n][1]);
                     out.write("\n");
                     ++n;
                 }
             }
             out.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    /**Edit a word and meaning * . */
-    public void dictionaryEdit(int lineNumber, String data) throws IOException {
-        Path path = Paths.get("dictionaries.txt");
-        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-        lines.set(lineNumber - 1, data);
-        Files.write(path, lines, StandardCharsets.UTF_8);
-        }
-        /*
-        2 đoạn method edit và delete của tui thì tui chưa kiểm thử đc vì tui chưa biết cách cho máy tui build DictionaryManagement thay vì liên tục build Dictionary
-        tui dùng inspect code thì không thấy có lỗi gì, nếu các ông thấy có lỗi hay là cái UI không hay lắm thì sửa giúp vào bảo tui
-         */
 
-    public void dictionaryDelete() throws IOException {
-        File inputFile = new File("src/main/java/dictionaries.txt");
-        File tempFile = new File("src/main/java/dictionariestemp.txt");
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-        String currentline;
-        while ((currentline = reader.readLine()) != null) {
-            if(!currentline.equalsIgnoreCase("")){
-            /*ở đây tui muốn đoạn này nhận từ để delete từ người dùng nhưng tui chưa biết làm thế nào
-            để cho từ đó vào đây, các ông có cách nào tốt hơn thì bảo tui
-             */
-                writer.write(currentline + System.getProperty("line.separator"));
+    public String getOUTPUT_DICT() {
+        return OUTPUT_DICT;
+    }
+    /*Edit a word and its new meaning*/
+    public void DictEdit() throws IOException {
+        System.out.print("Index of word u want to edit: ");
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String[] word = dict.getWord(n);
+        if (word == null) System.out.println("Invalid index!");
+        else {
+            BufferedReader file = new BufferedReader(new FileReader(DICT_LOCATION));
+            BufferedWriter fileout = new BufferedWriter(new FileWriter(OUTPUT_DICT));
+            System.out.println("The word" + word[0] + "will be edited into: ");
+            String new_word = sc.nextLine();
+            String NW = word[0].replace(word[0], new_word);
+            fileout.write(NW);
+            System.out.println("The meaning" + word[1] + "will be edited into: ");
+            String new_meaning = sc.nextLine();
+            String NM = word[1].replace(word[1], new_meaning);
+            fileout.write(NM);
+            file.close();
+            fileout.close();
+        }
+    }
+    /**
+     * Delete method with commandline
+     * */
+    public void delete() {
+        System.out.print("Index of word you want to delete: ");
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+        String[] word = dict.getWord(n);
+        if (word == null) System.out.println("Invalid index! ");
+        else {
+            System.out.println("Are you sure to delete word:" + word[0] + "? (Y to confirm)");
+            System.out.print(">>>> ");
+            char chr = sc.nextLine().charAt(0);
+            if (chr == 'Y') {
+                dict.delete(n);
+                System.out.println("Deleted! ");
+            } else {
+                System.out.println("Terminated! ");
             }
         }
-        writer.close();
-        reader.close();
     }
-    /*
-    ở cái tệp java này tui nhờ máy quick fix nhiều đoạn cho đỡ lỗi, có thể sai nên các ông kiểm thử
-     */
+
+
 }
