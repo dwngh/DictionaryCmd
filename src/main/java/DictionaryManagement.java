@@ -55,6 +55,18 @@ public class DictionaryManagement {
         }
 
     }
+    public void editWord() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the word you want to edit: ");
+        String wtg = sc.nextLine();
+        System.out.println("The meaning of the word is after editing is: ");
+        String wel = sc.nextLine();
+        if (!dict.edit(wtg, wel)) {
+            System.out.println("Couldn't find the word to fix!");
+        } else {
+            System.out.println("The word has been successfully corrected!");
+        }
+    }
 
     public void dictionaryLookup() {
         Scanner sc = new Scanner(System.in);

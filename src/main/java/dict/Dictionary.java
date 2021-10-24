@@ -98,10 +98,10 @@ public class Dictionary {
      *          False if there's not word with given word_target */
     public boolean edit(String word_target, String word_explain) {
         boolean isExisted = false;
-        for (Word item : dict) {
-            if (item.getWord_target().equals(word_target)) {
+        for (int i = 0; i < dict.size(); i++) {
+            if (dict.get(i).getWord_target().equals(word_target)) {
                 isExisted = true;
-                item.setWord_explain(word_explain);
+                dict.get(i).setWord_explain(word_explain);
             }
         }
         return isExisted;

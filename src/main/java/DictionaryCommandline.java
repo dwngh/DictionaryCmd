@@ -54,7 +54,10 @@ public class DictionaryCommandline {
         System.out.println("Exported to " + dict_mng.getOUTPUT_DICT());
     }
 
-    public void edit() {}
+    public void edit() {
+        dict_mng.editWord();
+        showAllWords();
+    }
 
     public void delete() {
         showAllWords();
